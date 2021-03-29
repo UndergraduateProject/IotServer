@@ -25,8 +25,7 @@ SECRET_KEY = '@s$!2c!^n6tj@v*23@b1$*_=6ny_e)ax9z^!_#a5g&6&ob%cpy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["192.168.1.129"]
 
 # Application definition
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'LED.apps.LedConfig',
     'enviroment.apps.EnviromentConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'IotServer.urls'
@@ -126,3 +128,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
