@@ -8,3 +8,5 @@ enviroment 裡面的兩個class已完成測試
 ```
 python manage.py runserver 192.168.1.129:8000
 ```
+
+### this is from organization
