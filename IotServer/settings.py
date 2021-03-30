@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'LED.apps.LedConfig',
     'enviroment.apps.EnviromentConfig',
+    'corsheader',
 ]
 
 MIDDLEWARE = [
