@@ -1,4 +1,5 @@
-# IotServer
+# IotServer (remote url = root@140.117.71.98)
+
 
 LED裡面是之前測試的內容
 
