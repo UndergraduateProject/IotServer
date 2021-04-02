@@ -9,5 +9,7 @@ enviroment 裡面的兩個class已完成測試
 ```
 python manage.py runserver 192.168.1.129:8000
 ```
+如果在不同網路下測試 要在setting加上ALLOWED HOST
+
 
 ### this is from organization
