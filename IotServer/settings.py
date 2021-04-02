@@ -25,8 +25,6 @@ SECRET_KEY = '@s$!2c!^n6tj@v*23@b1$*_=6ny_e)ax9z^!_#a5g&6&ob%cpy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#第一個:富野路網路、第二個:Nerf的手機
-#ALLOWED_HOSTS = ["192.168.1.129","172.20.10.12","140.117.71.98"]
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'LED.apps.LedConfig',
     'enviroment.apps.EnviromentConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
