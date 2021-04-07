@@ -17,5 +17,5 @@ password:rootroot
 ## using anaconda to handle virtual environment
 ```
 conda env export > environment.yml   ## expport requried packages
-conda env create -f environment.yml
+conda env update --file environment.yml    ## update env packages
 ```
