@@ -1,15 +1,14 @@
-# IotServer (remote url = root@140.117.71.98)
+# IotServer (Django REST Framwork)
 
-
-LED裡面是之前測試的內容
-
-enviroment 裡面的兩個class已完成測試
+## ssh 連線
+```
+ssh root@140.117.71.98
+password:rootroot
+```
 
 ## run the server 
 ```
-python manage.py runserver 192.168.1.129:8000
+python manage.py runserver 0.0.0.0:8000
 ```
 如果在不同網路下測試 要在setting加上ALLOWED HOST
-
-
-### this is from organization
+runserver的command 改成自己的private IP
