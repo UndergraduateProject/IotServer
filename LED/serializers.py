@@ -12,8 +12,6 @@ class LEDSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    LEDs = serializers.HyperlinkedRelatedField(many=True, view_name='LED-detail', read_only=True)
-    #LEDs = serializers.PrimaryKeyRelatedField(many=True, queryset=LED.objects.all())
 
     class Meta:
         model = User
