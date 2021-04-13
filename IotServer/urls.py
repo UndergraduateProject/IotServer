@@ -14,27 +14,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from LED.views import LedViewSet, UserViewSet
 from enviroment.views import HumidityViewSet, TemperatureViewSet
-from users.views import UsersViewSet
+from client.views import ClientViewSet
+from utils.views import certification
 
 router = DefaultRouter()
 ### LED urls
-router.register(r'Led', LedViewSet)
-router.register(r'users', UsersViewSet)
+router.register(r"Led", LedViewSet)
+router.register(r"users", UserViewSet)
 
 ### enviroment urls
-router.register(r'humidity', HumidityViewSet)
-router.register(r'temperature', TemperatureViewSet)
+router.register(r"humidity", HumidityViewSet)
+router.register(r"temperature", TemperatureViewSet)
 
-## users urls
-router.register(r'users', UsersViewSet)
+### client urls
+router.register(r"client", ClientViewSet)
+
+# utilsrouter = DefaultRouter()
+# utilsrouter.register(r"certification/", certification)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/', include(router.urls)),
-    path('utils/', include('utils.urls'))
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/", include(router.urls)),
+    path("utils/", include("utils.urls")),
 ]
