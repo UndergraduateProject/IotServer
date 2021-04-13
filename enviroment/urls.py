@@ -3,9 +3,9 @@ from rest_framework.routers import DefaultRouter
 from enviroment import views
 
 router = DefaultRouter()
-router.register(r'humidity', views.HumidityViewSet)
-router.register(r'temperature', views.TemperatureViewSet)
+router.register(r'/humidity', views.HumidityViewSet)
+router.register(r'/temperature', views.TemperatureViewSet)
 
 urlpatterns = [
-    path('enviroment/',include(router.urls))
+    path('',include(router.urls))
 ]

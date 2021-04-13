@@ -1,60 +1,36 @@
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import generics
-
 from LED.models import LED
-from LED.serializers import LEDSerializer,UserSerializer
 from django.contrib.auth.models import User
+from LED.serializers import LEDSerializer,UserSerializer
 from rest_framework import permissions
 from LED.permissions import IsUsersOrReadOnly
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework import renderers
 
-class LEDList(generics.ListCreateAPIView):
+class LedViewSet(viewsets.ModelViewSet):
     """
-    List all snippets, or create a new snippet.
-    """
-    queryset = LED.objects.all()
-    serializer_class = LEDSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
 
-    def perform_create(self, serializer):
-        serializer.save(users=self.request.user)
-
-class LEDDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a LED instance.
+    Additionally we also provide an extra `LEDusers` action.
     """
     queryset = LED.objects.all()
     serializer_class = LEDSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsUsersOrReadOnly]
 
-class UserList(generics.ListAPIView):
+    #這邊要注意default url path會是這個function的名字，若要自定義需使用"url_path"
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    def LEDusers(self, request, *args, **kwargs):
+        led = self.get_object()
+        return Response(led.users)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve` actions.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework import renderers
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'LED': reverse('LED-list', request=request, format=format)
-    })
-
-class LEDUsers(generics.GenericAPIView):
-    queryset = LED.objects.all()
-    renderer_classes = [renderers.StaticHTMLRenderer]
-
-    def get(self, request, *args, **kwargs):
-        snippet = self.get_object()
-        return Response(snippet.highlighted)

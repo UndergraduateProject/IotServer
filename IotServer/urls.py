@@ -15,12 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from LED import views 
+from rest_framework.routers import DefaultRouter
+from LED.views import LedViewSet, UserViewSet
+from enviroment.views import HumidityViewSet, TemperatureViewSet
+
+router = DefaultRouter()
+### LED urls
+router.register(r'Led', LedViewSet)
+router.register(r'users', UserViewSet)
+
+### enviroment urls
+router.register(r'humidity', HumidityViewSet)
+router.register(r'temperature', TemperatureViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('root/', views.api_root),
-    path('', include('LED.urls')),
-    path('', include('enviroment.urls')),
+    path('api/', include(router.urls)),
+    path('utils/', include('utils.urls'))
 ]

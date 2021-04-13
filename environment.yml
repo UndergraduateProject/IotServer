@@ -1,4 +1,4 @@
-name: testing
+name: IotServer
 channels:
   - defaults
 dependencies:
@@ -15,8 +15,10 @@ dependencies:
   - wheel=0.36.2=pyhd3eb1b0_0
   - wincertstore=0.2=py39h2bbff1b_0
   - pip:
-    - chardet==4.0.0
-    - idna==2.10
-    - requests==2.25.1
-    - urllib3==1.26.4
-prefix: C:\Users\willi\anaconda3\envs\testing
+    - asgiref==3.3.4
+    - django==3.2
+    - django-cors-headers==3.7.0
+    - djangorestframework==3.12.4
+    - pytz==2021.1
+    - sqlparse==0.4.1
+prefix: C:\Users\willi\anaconda3\envs\IotServer
