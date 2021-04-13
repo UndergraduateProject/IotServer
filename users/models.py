@@ -7,5 +7,5 @@ class User(models.Model):
     UserID = models.AutoField(primary_key=True)
     username = models.CharField(max_length=15)
     password = models.CharField(max_length=15)
-    email = models.EmailField(max_length=None)
-    enable = models.BooleanField()
+    email = models.EmailField(max_length=30)
+    enable = models.BooleanField(default= False)

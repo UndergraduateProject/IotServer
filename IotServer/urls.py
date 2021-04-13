@@ -18,15 +18,19 @@ from django.urls import path,include
 from rest_framework.routers import DefaultRouter
 from LED.views import LedViewSet, UserViewSet
 from enviroment.views import HumidityViewSet, TemperatureViewSet
+from users.views import UsersViewSet
 
 router = DefaultRouter()
 ### LED urls
 router.register(r'Led', LedViewSet)
-router.register(r'users', UserViewSet)
+router.register(r'users', UsersViewSet)
 
 ### enviroment urls
 router.register(r'humidity', HumidityViewSet)
 router.register(r'temperature', TemperatureViewSet)
+
+## users urls
+router.register(r'users', UsersViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

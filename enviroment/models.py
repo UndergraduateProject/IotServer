@@ -5,7 +5,7 @@ from django.db import models
 
 class Humidity(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    value = models.Fl oatField()
+    value = models.FloatField()
     sensorId = models.CharField(max_length=10, default='none')
 
 
