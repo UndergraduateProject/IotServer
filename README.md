@@ -19,3 +19,12 @@ password:rootroot
 conda env export > environment.yml   ## expport requried packages
 conda env update --file environment.yml    ## update env packages
 ```
+
+## utils API
+### mail certification
+```
+url : http://140.117.71.98:8000/utils/mail_certification/
+method : POST
+data : mail
+response : success->是否成功寄出認證信件
+```
