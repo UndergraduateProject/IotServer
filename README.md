@@ -1,5 +1,8 @@
 # IotServer (Django REST Framwork)
 
+> hyperlink 所對應的attr必須和models裡面定義的一樣
+
+
 ### To do list
 - url filters
 - verify 邏輯要確定
