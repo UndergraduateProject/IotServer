@@ -1,6 +1,12 @@
 # IotServer (Django REST Framwork)
 
-## run the server 
+### To do list
+- url filters
+- verify 邏輯要確定
+- modelviewset 要加上hyperlink
+- mqtt 
+
+## Run the server 
 ```
 python manage.py runserver 0.0.0.0:8000
 ```
@@ -14,7 +20,7 @@ ssh root@140.117.71.98
 password:rootroot
 ```
 
-## using anaconda to handle virtual environment
+## Using anaconda to handle virtual environment
 ```
 conda env export > environment.yml   ## expport requried packages
 conda env update --file environment.yml    ## update env packages
