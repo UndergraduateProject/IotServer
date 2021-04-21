@@ -1,11 +1,14 @@
-from django.urls import path,include
+# currently not working
+
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from enviroment import views
 
 router = DefaultRouter()
-router.register(r'/humidity', views.HumidityViewSet)
-router.register(r'/temperature', views.TemperatureViewSet)
+router.register(r'/sensor', views.SensorViewSet)
+router.register(r'/humidtemp', views.HumidTempViewSet)
+router.register(r'/moisture', views.MoistureViewSet)
 
 urlpatterns = [
-    path('',include(router.urls))
+    path('', include(router.urls))
 ]

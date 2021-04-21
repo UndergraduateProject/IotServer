@@ -1,15 +1,24 @@
 from django.db import models
+#from ..client.models import Client
 
 # Create your models here.
 
 
-class Humidity(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    value = models.FloatField()
-    sensorId = models.CharField(max_length=10, default='none')
+class Sensor(models.Model):
+    #    clientID = models.ForeignKey(Client, on_delete=models.CASCADE)
+    sensorID = models.IntegerField(primary_key=True, auto_created=True)
+    sensorName = models.CharField(max_length=30)
 
 
-class Temperature(models.Model):
+class Humid_Temp(models.Model):
     created = models.DateTimeField(auto_now_add=True)
+    humidity = models.FloatField()
+    temperature = models.FloatField()
+    heatIndex = models.FloatField(default=0)
+    # sensorID = models.ForeignKey(Sensor, on_delete=models.CASCADE)
+
+
+class Moisture(models.Model):
+    created = models.DateTimeField()
     value = models.FloatField()
-    sensorId = models.CharField(max_length=10, default='none')
+    # sensorID = models.ForeignKey(Sensor, on_delete=models.CASCADE)
