@@ -8,6 +8,7 @@
 - verify 邏輯要確定
 - modelviewset 要加上hyperlink
 - mqtt 
+- sqlite 更新問題
 
 ## Run the server 
 ```
