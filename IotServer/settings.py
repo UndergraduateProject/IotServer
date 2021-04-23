@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "enviroment.apps.EnviromentConfig",
     "client.apps.ClientConfig",
     "corsheaders",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",  ##using limit and offset
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],   
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
