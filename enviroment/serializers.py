@@ -46,4 +46,4 @@ class MoistureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Moisture
-        fields = ["id", "created", "value", "sensor", "sensor"]
+        fields = ["id", "created", "value", "sensor"]
