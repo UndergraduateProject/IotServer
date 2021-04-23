@@ -23,6 +23,3 @@ def sendmail(mail):
             print("Complete!")
         except Exception as e:
             print("Error message: ", e)
-
-if __name__ == '__main__':
-    sendmail("william5030788@gmail.com")
