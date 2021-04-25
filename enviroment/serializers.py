@@ -4,13 +4,13 @@ from enviroment.models import Sensor, Humid_Temp, Moisture
 
 class SensorSerializer(serializers.ModelSerializer):
 
-    clientID = serializers.HyperlinkedRelatedField(
+    client = serializers.HyperlinkedRelatedField(
         read_only= True,
         view_name='client-detail')
-    client_id = serializers.ReadOnlyField(source='clientID.username')
+    client_name = serializers.ReadOnlyField(source='client.username')
     class Meta:
         model = Sensor
-        fields = ['url', 'sensorID', 'sensorName', 'clientID', 'client_id']
+        fields = ['url', 'sensorID', 'sensorName', 'client', 'client_name']
 
 class HumidityTemperatureSerializer(serializers.ModelSerializer):
 
