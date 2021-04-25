@@ -21,6 +21,11 @@ from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet
 from client.views import ClientViewSet
 from utils.views import certification
 
+##authentications
+from user.views import RegisterAPI, LoginAPI, UserAPI
+from knox import views as knox_views
+from rest_framework.authtoken import views
+
 router = DefaultRouter()
 # LED urls
 router.register(r"Led", LedViewSet)
@@ -43,4 +48,10 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
     path("utils/", include("utils.urls")),
+    path("auth/", include("user.urls"))
+    # path("auth/register/", RegisterAPI.as_view()),
+    # path("auth/login/", LoginAPI.as_view()),
+    # path("auth/logout/",knox_views.LogoutView.as_view(), name='knox_logout'),
+    # path("auth/user_testing/", UserAPI.as_view()), # for request.user testing
+    #path("api/auth/", include("knox.urls")),
 ]

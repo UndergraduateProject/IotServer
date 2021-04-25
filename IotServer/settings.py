@@ -36,12 +36,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # custom installed
     "rest_framework",
+    "corsheaders",
+    "django_filters",
+    'knox', 
+    # installed apps
     "LED.apps.LedConfig",
     "enviroment.apps.EnviromentConfig",
     "client.apps.ClientConfig",
-    "corsheaders",
-    "django_filters",
+    "user.apps.UserConfig",
 ]
 
 MIDDLEWARE = [
@@ -132,6 +136,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",  ##using limit and offset
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],   
+    "DEFAULT_AUTHENTICATION_CLASSES" : ('knox.auth.TokenAuthentication',)  ## using for authentication
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
