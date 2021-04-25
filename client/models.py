@@ -8,3 +8,6 @@ class Client(models.Model):
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     verify = models.IntegerField(default=999999)
+
+    def __str__(self):
+        return self.username

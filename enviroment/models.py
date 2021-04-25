@@ -5,9 +5,8 @@ from client.models import Client
 
 
 class Sensor(models.Model):
-    client = models.ForeignKey(
-        Client, related_name="sensors", on_delete=models.CASCADE, null=True
-    )
+
+    client = models.ForeignKey(Client, related_name="sensors", on_delete=models.CASCADE, null=True, blank=True)
     sensorID = models.IntegerField(primary_key=True, auto_created=True)
     sensorName = models.CharField(max_length=30)
 
@@ -20,9 +19,7 @@ class Humid_Temp(models.Model):
     humidity = models.FloatField()
     temperature = models.FloatField()
     heatIndex = models.FloatField(default=0)
-    sensor = models.ForeignKey(
-        Sensor, related_name="humid_temp", on_delete=models.CASCADE, null=True
-    )
+    sensor = models.ForeignKey(Sensor, related_name="humid_temp", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return "humidity : %d , temperature : %d" % (self.humidity, self.temperature)
@@ -31,9 +28,7 @@ class Humid_Temp(models.Model):
 class Moisture(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     value = models.FloatField()
-    sensor = models.ForeignKey(
-        Sensor, related_name="moisture", on_delete=models.CASCADE, null=True
-    )
+    sensor = models.ForeignKey(Sensor, related_name="moisture", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.value
+        return str(self.value)
