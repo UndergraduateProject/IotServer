@@ -1,10 +1,18 @@
 from rest_framework.decorators import api_view
 from utils.mail import sendmail
-from utils.socket_connection import SocketMsg
+from utils.water import action
 from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from django.contrib.auth import authenticate, login
+
+@api_view(["GET", "POST"])
+def water(request):
+    if request.method == "POST":
+        action()
+        return Response({"success": True})
+    return Response({"success": False})
+
 
 @api_view(["GET", "POST"])
 def certification(request):
@@ -12,16 +20,6 @@ def certification(request):
         sendmail(request.POST["mail"])
         return Response({"success": True})
     return Response({"success": False})
-
-@api_view(["GET", "POST"])
-def socket_connection(request):
-    if request.method == "GET":
-        print('123')
-        socketmsg = SocketMsg("turn on led")
-        socketmsg.send_to_iot()
-        return Response({"success": True})
-    return Response({"success": False})
-
 @api_view(["GET", "POST"])
 def login(request):
     #print (request.user)

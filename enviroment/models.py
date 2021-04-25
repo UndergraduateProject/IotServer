@@ -5,6 +5,7 @@ from client.models import Client
 
 
 class Sensor(models.Model):
+
     client = models.ForeignKey(Client, related_name="sensors", on_delete=models.CASCADE, null=True, blank=True)
     sensorID = models.IntegerField(primary_key=True, auto_created=True)
     sensorName = models.CharField(max_length=30)
