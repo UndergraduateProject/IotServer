@@ -42,6 +42,6 @@ def login(request):
 def api_root(request, format=None):
     return Response({
         "mail_certification" : reverse("certification", request=request, format=format),
-        "socket_connection" : reverse("socket_connection", request=request, format=format),
+        "action_water": reverse("water", request=request, format=format),
         "login" : reverse("login", request=request, format=format),
     })
