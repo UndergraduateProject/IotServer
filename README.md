@@ -1,5 +1,7 @@
 # IotServer (Django REST Framwork)
 
+> warning!!! code不可以有print，不然run background會報錯!!!
+
 ### To do list
 - [x] url filters
 - [ ] verify 邏輯要確定
