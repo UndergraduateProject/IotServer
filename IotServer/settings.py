@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "LED.apps.LedConfig",
     "enviroment.apps.EnviromentConfig",
     "client.apps.ClientConfig",
-    "user.apps.UserConfig",
 ]
 
 MIDDLEWARE = [
