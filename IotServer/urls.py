@@ -16,20 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from LED.views import LedViewSet, UserViewSet
 from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet
-from client.views import ClientViewSet
-from utils.views import certification
-
-##authentications
-from client.views import RegisterAPI, LoginAPI, UserAPI
-from knox import views as knox_views
-from rest_framework.authtoken import views
+from user.views import ClientViewSet
 
 router = DefaultRouter()
-# LED urls
-router.register(r"Led", LedViewSet)
-router.register(r"users", UserViewSet)
 
 # enviroment urls
 router.register(r'sensor', SensorViewSet)
@@ -39,19 +29,10 @@ router.register(r'moisture', MoistureViewSet)
 # client urls
 router.register(r"client", ClientViewSet)
 
-
-# utilsrouter = DefaultRouter()
-# utilsrouter.register(r"certification/", certification)
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
     path("utils/", include("utils.urls")),
-    path("auth/", include("client.urls")),
-    # path("auth/register/", RegisterAPI.as_view()),
-    # path("auth/login/", LoginAPI.as_view()),
-    # path("auth/logout/",knox_views.LogoutView.as_view(), name='knox_logout'),
-    # path("auth/user_testing/", UserAPI.as_view()), # for request.user testing
-    # path("api/auth/", include("knox.urls")),
+    path("users/", include("user.urls"))
 ]
