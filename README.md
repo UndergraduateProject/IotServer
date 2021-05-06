@@ -41,21 +41,22 @@ response -> {success : 是否成功寄出認證信件}
 ## auth API
 ### register
 ```
-url -> http://140.117.71.98:8000/auth/register/
+url -> http://140.117.71.98:8000/user/register/
 method -> POST
 data -> username, password, email
 response -> {user : user detail} 
+response fail -> {use}
 ```
 ### login
 ```
-url -> http://140.117.71.98:8000/auth/register/
+url -> http://140.117.71.98:8000/user/register/
 method -> POST
 data -> username, password
 response -> {user : user detail, token : a hash number}
 ```
 ### logout
 ```
-url : http://140.117.71.98:8000/auth/register/
+url : http://140.117.71.98:8000/user/register/
 method -> POST
 data -> {}
 response -> {}
