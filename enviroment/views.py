@@ -13,19 +13,19 @@ from enviroment.serializers import (
 
 
 class SensorViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
-    filterset_fields = ["client__username"]
+    filterset_fields = ["user__username"]
 
 
 class HumidTempViewSet(viewsets.ModelViewSet):
     queryset = Humid_Temp.objects.all()
     serializer_class = HumidityTemperatureSerializer
-    filterset_fields = ["humidity", "temperature", "heatIndex", "sensor__sensorID"]
+    filterset_fields = ["humidity", "temperature", "heatIndex", "sensor__sensorName"]
 
 
 class MoistureViewSet(viewsets.ModelViewSet):
     queryset = Moisture.objects.all()
     serializer_class = MoistureSerializer
-    filterset_fields = ["value", "sensor__sensorID"]
+    filterset_fields = ["value", "sensor__sensorName"]

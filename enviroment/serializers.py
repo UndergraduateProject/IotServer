@@ -1,22 +1,19 @@
 from rest_framework import serializers
 from enviroment.models import Sensor, Humid_Temp, Moisture
+from django.contrib.auth.models import User
 
 
 class SensorSerializer(serializers.ModelSerializer):
 
-    client = serializers.HyperlinkedRelatedField(
-        read_only= True,
-        view_name='client-detail')
-    client_name = serializers.ReadOnlyField(source='client.username')
+    owner = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Sensor
-        fields = ['url', 'sensorID', 'sensorName', 'client', 'client_name']
+        fields = ["id", "url", "sensorName",  "owner"]
 
 class HumidityTemperatureSerializer(serializers.ModelSerializer):
 
-    sensor = serializers.HyperlinkedRelatedField(
-        read_only=True, view_name="sensor-detail"
-    )
+    sensor = serializers.HyperlinkedRelatedField(read_only=True, view_name="sensor-detail")
 
     class Meta:
         model = Humid_Temp
@@ -25,9 +22,7 @@ class HumidityTemperatureSerializer(serializers.ModelSerializer):
 
 class MoistureSerializer(serializers.ModelSerializer):
 
-    sensor = serializers.HyperlinkedRelatedField(
-        read_only=True, view_name="sensor-detail"
-    )
+    sensor = serializers.HyperlinkedRelatedField(read_only=True, view_name="sensor-detail")
 
     class Meta:
         model = Moisture

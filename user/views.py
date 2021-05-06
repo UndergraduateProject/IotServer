@@ -4,24 +4,9 @@ from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework import viewsets, generics, permissions
 
-from user.models import Client
-from user.serializers import ClientSerializer
 from .serializers import UserSerializer, RegisterSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
-
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
-    permissions_classes = [permissions.IsAuthenticated]
-    filterset_fields = ["username", "email"]
-
-    def get_queryset(self):
-        return self.request.user.clients.all()
-    
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
 
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
