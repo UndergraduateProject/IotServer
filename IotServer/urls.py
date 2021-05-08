@@ -16,15 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from LED.views import LedViewSet, UserViewSet
 from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet
-from client.views import ClientViewSet
-from utils.views import certification
 
 router = DefaultRouter()
-# LED urls
-router.register(r"Led", LedViewSet)
-router.register(r"users", UserViewSet)
 
 # enviroment urls
 router.register(r'sensor', SensorViewSet)
@@ -32,15 +26,11 @@ router.register(r'humidtemp', HumidTempViewSet)
 router.register(r'moisture', MoistureViewSet)
 
 # client urls
-router.register(r"client", ClientViewSet)
-
-
-# utilsrouter = DefaultRouter()
-# utilsrouter.register(r"certification/", certification)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
     path("utils/", include("utils.urls")),
+    path("user/", include("user.urls"))
 ]
