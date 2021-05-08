@@ -5,9 +5,9 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-@api_view(["GET", "POST"])
+@api_view(["GET"])
 def water(request):
-    if request.method == "POST":
+    if request.method == "GET":
         action()
         return Response({"success": True})
     return Response({"success": False})
