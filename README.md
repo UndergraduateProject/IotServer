@@ -1,13 +1,9 @@
 # IotServer (Django REST Framwork)
 
-> warning!!! code不可以有print，不然run background會報錯!!!
+## Models
+### Plantimg
 
-### To do list
-- [x] url filters
-- [ ] verify 邏輯要確定
-- [x] modelviewset 要加上hyperlink
-- [x] mqtt   ##change to socket 
-- [x] sqlite 更新問題
+路徑為 ```media/year/month+day/hour+minnute.jpg``` e.g."media/2021/0621/2127.jpg"
 
 ## Run the server 
 ```
@@ -64,4 +60,5 @@ response -> {}
 
 ## some notes
 > hyperlink 所對應的attr必須和models裡面定義的一樣
+> warning!!! code不可以有print，不然run background會報錯!!!
 
