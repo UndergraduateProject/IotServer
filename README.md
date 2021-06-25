@@ -1,13 +1,9 @@
 # IotServer (Django REST Framwork)
 
-> warning!!! code不可以有print，不然run background會報錯!!!
+## Models
+### Plantimg
 
-### To do list
-- [x] url filters
-- [ ] verify 邏輯要確定
-- [x] modelviewset 要加上hyperlink
-- [x] mqtt   ##change to socket 
-- [x] sqlite 更新問題
+路徑為 ```media/year/month+day/hour+minnute.jpg``` e.g."media/2021/0621/2127.jpg"
 
 ## Run the server 
 ```
@@ -41,21 +37,22 @@ response -> {success : 是否成功寄出認證信件}
 ## auth API
 ### register
 ```
-url -> http://140.117.71.98:8000/auth/register/
+url -> http://140.117.71.98:8000/user/register/
 method -> POST
 data -> username, password, email
 response -> {user : user detail} 
+response fail -> {use}
 ```
 ### login
 ```
-url -> http://140.117.71.98:8000/auth/register/
+url -> http://140.117.71.98:8000/user/register/
 method -> POST
 data -> username, password
 response -> {user : user detail, token : a hash number}
 ```
 ### logout
 ```
-url : http://140.117.71.98:8000/auth/register/
+url : http://140.117.71.98:8000/user/register/
 method -> POST
 data -> {}
 response -> {}
@@ -63,4 +60,5 @@ response -> {}
 
 ## some notes
 > hyperlink 所對應的attr必須和models裡面定義的一樣
+> warning!!! code不可以有print，不然run background會報錯!!!
 
