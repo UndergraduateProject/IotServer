@@ -29,3 +29,12 @@ class Moisture(models.Model):
     
     def __str__(self):
         return str(self.value)
+
+class PlantImg(models.Model):
+    name = models.CharField(blank=True, max_length=100)
+    sensor = models.ForeignKey(Sensor, related_name="camera", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    img = models.ImageField(upload_to= lambda instance, filename : instance.created.strftime('%Y/')+instance.created.strftime('%m%d/')+instance.created.strftime('%H%M')+'.jpg')
+
+    def __str__(self):
+        return str(self.name)

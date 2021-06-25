@@ -4,11 +4,12 @@ from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework import permissions
 
-from enviroment.models import Sensor, Humid_Temp, Moisture
+from enviroment.models import Sensor, Humid_Temp, Moisture, PlantImg
 from enviroment.serializers import (
     SensorSerializer,
     HumidityTemperatureSerializer,
     MoistureSerializer,
+    PlantImgSerializer,
 )
 
 
@@ -29,3 +30,7 @@ class MoistureViewSet(viewsets.ModelViewSet):
     queryset = Moisture.objects.all()
     serializer_class = MoistureSerializer
     filterset_fields = ["value", "sensor__sensorName"]
+
+class PlantImgViewSet(viewsets.ModelViewSet):
+    queryset = PlantImg.objects.all()
+    serializer_class = PlantImgSerializer

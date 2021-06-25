@@ -1,5 +1,5 @@
 from django.contrib import admin
-from enviroment.models import Sensor, Humid_Temp, Moisture
+from enviroment.models import Sensor, Humid_Temp, Moisture, PlantImg
 # Register your models here.
 
 class Humid_TempAdmin(admin.ModelAdmin):
@@ -11,3 +11,4 @@ class MoistureAdmin(admin.ModelAdmin):
 admin.site.register(Sensor)
 admin.site.register(Humid_Temp,Humid_TempAdmin)
 admin.site.register(Moisture,MoistureAdmin)
+admin.site.register(PlantImg)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from enviroment.models import Sensor, Humid_Temp, Moisture
+from enviroment.models import Sensor, Humid_Temp, Moisture, PlantImg
 from django.contrib.auth.models import User
 
 
@@ -27,3 +27,12 @@ class MoistureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Moisture
         fields = ["id", "created", "value", "sensor"]
+    
+
+class PlantImgSerializer(serializers.ModelSerializer):
+
+    sensor = serializers.HyperlinkedRelatedField(read_only=True, view_name="sensor-detail")
+
+    class Meta:
+        model = PlantImg
+        fields = ["id", "created", "sensor", "img"]
