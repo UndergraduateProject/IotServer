@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet
+from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet, PlantImgViewSet
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 router = DefaultRouter()
 
@@ -24,6 +27,7 @@ router = DefaultRouter()
 router.register(r'sensor', SensorViewSet)
 router.register(r'humidtemp', HumidTempViewSet)
 router.register(r'moisture', MoistureViewSet)
+router.register(r'plantimg', PlantImgViewSet)
 
 # client urls
 
@@ -34,3 +38,6 @@ urlpatterns = [
     path("utils/", include("utils.urls")),
     path("user/", include("user.urls"))
 ]
+
+# image storage
+urlpatterns +=  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
