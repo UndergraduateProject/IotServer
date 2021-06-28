@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from rest_framework import filters
-from rest_framework import permissions
+from django.shortcuts import get_object_or_404
 
 from enviroment.models import Sensor, Humid_Temp, Moisture, PlantImg
 from enviroment.serializers import (
@@ -14,7 +14,6 @@ from enviroment.serializers import (
 
 
 class SensorViewSet(viewsets.ModelViewSet):
-    #permission_classes = [permissions.IsAuthenticated]
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
     filterset_fields = ["user__username"]
@@ -23,14 +22,34 @@ class SensorViewSet(viewsets.ModelViewSet):
 class HumidTempViewSet(viewsets.ModelViewSet):
     queryset = Humid_Temp.objects.all()
     serializer_class = HumidityTemperatureSerializer
-    filterset_fields = ["humidity", "temperature", "heatIndex", "sensor__sensorName"]
+    filterset_fields = ["humidity", "temperature", "heatIndex", "sensor__created"]
+
+    def perform_create(self, serializer):
+        sensor = self.request.data.get('sensor') # get sensor's name
+        sensor = get_object_or_404(Sensor, name=sensor)
+        if serializer.is_valid():
+            serializer.save(sensor=sensor)
 
 
 class MoistureViewSet(viewsets.ModelViewSet):
     queryset = Moisture.objects.all()
     serializer_class = MoistureSerializer
-    filterset_fields = ["value", "sensor__sensorName"]
+    filterset_fields = ["value", "sensor"]
+
+    def perform_create(self, serializer):
+        sensor = self.request.data.get('sensor') # get sensor's name
+        sensor = get_object_or_404(Sensor, name=sensor)
+        if serializer.is_valid():
+            serializer.save(sensor=sensor)
+
+        
 
 class PlantImgViewSet(viewsets.ModelViewSet):
     queryset = PlantImg.objects.all()
     serializer_class = PlantImgSerializer
+
+    def perform_create(self, serializer):
+        sensor = self.request.data.get('sensor') # get sensor's name
+        sensor = get_object_or_404(Sensor, name=sensor)
+        if serializer.is_valid():
+            serializer.save(sensor=sensor)

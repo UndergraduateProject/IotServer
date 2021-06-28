@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 
 class SensorSerializer(serializers.ModelSerializer):
 
-    owner = serializers.ReadOnlyField(source='user.username')
+    username = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Sensor
-        fields = ["id", "url", "sensorName",  "owner"]
+        fields = ["url", "name", "description", "created", "user_id", "username"]
 
 class HumidityTemperatureSerializer(serializers.ModelSerializer):
 
@@ -17,7 +17,7 @@ class HumidityTemperatureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Humid_Temp
-        fields = ["id", "created", "humidity", "temperature", "heatIndex", "sensor"]
+        fields = ["id", "humidity", "temperature", "heatIndex", "created", "sensor"]
 
 
 class MoistureSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class MoistureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Moisture
-        fields = ["id", "created", "value", "sensor"]
+        fields = ["id", "value", "created", "sensor"]
     
 
 class PlantImgSerializer(serializers.ModelSerializer):
@@ -35,4 +35,4 @@ class PlantImgSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PlantImg
-        fields = ["id", "created", "sensor", "img"]
+        fields = ["id", "img", "created", "sensor"]

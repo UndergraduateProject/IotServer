@@ -1,14 +1,14 @@
 from django.db import models
 #from django.contrib.auth.models import User
-# Create your models here.
-
 
 class Sensor(models.Model):
-    user = models.ForeignKey('auth.User', related_name ='sensors', on_delete=models.CASCADE)
-    sensorName = models.CharField(max_length=30)
+    user = models.ForeignKey('auth.User', related_name ='sensor', on_delete=models.CASCADE)
+    name = models.CharField(primary_key=True, max_length=128)
+    description = models.CharField(blank=True, max_length=512)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.sensorName
+        return self.name
 
 
 class Humid_Temp(models.Model):
@@ -34,10 +34,10 @@ def imghelper(instance, filename):
     return instance.created.strftime('%Y/')+instance.created.strftime('%m%d/')+instance.created.strftime('%H%M')+'.jpg'
 
 class PlantImg(models.Model):
-    name = models.CharField(blank=True, max_length=100)
-    sensor = models.ForeignKey(Sensor, related_name="camera", on_delete=models.CASCADE)
+    sensor = models.ForeignKey(Sensor, related_name="plantimg", on_delete=models.CASCADE)
+    #sensor = models.ForeignKey("Plant", related_name="plantimg", on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     img = models.ImageField(upload_to=imghelper)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.id)

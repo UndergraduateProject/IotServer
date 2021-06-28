@@ -36,10 +36,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # installed
     "rest_framework",
-    "corsheaders",
-    "django_filters",
-    'rest_framework.authtoken',
+    "corsheaders",   
+    'django_cleanup', # delete image file after delete raw data in database
+    "django_filters", # using url filters
+    'rest_framework.authtoken', 
     "enviroment.apps.EnviromentConfig",
     "user.apps.UserConfig",
 ]
@@ -132,9 +134,9 @@ REST_FRAMEWORK = {
     "DATETIME_FORMAT": "%m/%d/%Y %H:%M:%S",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",  ##using limit and offset
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",  # use limit and offset
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],   
-    "DEFAULT_AUTHENTICATION_CLASSES" : ['rest_framework.authentication.TokenAuthentication',],
+    "DEFAULT_AUTHENTICATION_CLASSES" : ['rest_framework.authentication.TokenAuthentication',], # use token to authenticate
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticatedOrReadOnly',]
 }
 
