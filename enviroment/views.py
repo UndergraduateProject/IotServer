@@ -27,8 +27,7 @@ class HumidTempViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         sensor = self.request.data.get('sensor') # get sensor's name
         sensor = get_object_or_404(Sensor, name=sensor)
-        if serializer.is_valid():
-            serializer.save(sensor=sensor)
+        serializer.save(sensor=sensor)
 
 
 class MoistureViewSet(viewsets.ModelViewSet):
@@ -39,8 +38,7 @@ class MoistureViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         sensor = self.request.data.get('sensor') # get sensor's name
         sensor = get_object_or_404(Sensor, name=sensor)
-        if serializer.is_valid():
-            serializer.save(sensor=sensor)
+        serializer.save(sensor=sensor)
 
         
 
@@ -51,5 +49,4 @@ class PlantImgViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         sensor = self.request.data.get('sensor') # get sensor's name
         sensor = get_object_or_404(Sensor, name=sensor)
-        if serializer.is_valid():
-            serializer.save(sensor=sensor)
+        serializer.save(sensor=sensor)
