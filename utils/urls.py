@@ -1,9 +1,9 @@
 from django.urls import path, include
-from utils import views
+from utils.views import watering, MailCertificate, api_root
 
 
 urlpatterns = [
-    path("mail_certification/", views.certification, name="certification"),
-    path("action_water/", views.water, name="water"),
-    path("", views.api_root),
+    path("watering/", watering.as_view(), name="watering"),
+    path("mail_certification/", MailCertificate.as_view(), name='mail_certification'),
+    path("", api_root),
 ]
