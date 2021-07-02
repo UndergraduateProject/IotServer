@@ -1,10 +1,7 @@
-from django.shortcuts import render
-from rest_framework import serializers, viewsets
-from rest_framework.response import Response
-from rest_framework import filters
+from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 
-from enviroment.models import Sensor, Humid_Temp, Moisture, PlantImg
+from enviroment.models import Sensor, HumidTemp, Moisture, PlantImg
 from enviroment.serializers import (
     SensorSerializer,
     HumidityTemperatureSerializer,
@@ -20,7 +17,7 @@ class SensorViewSet(viewsets.ModelViewSet):
 
 
 class HumidTempViewSet(viewsets.ModelViewSet):
-    queryset = Humid_Temp.objects.all()
+    queryset = HumidTemp.objects.all()
     serializer_class = HumidityTemperatureSerializer
     filterset_fields = ["humidity", "temperature", "heatIndex", "sensor__created"]
 
@@ -33,7 +30,7 @@ class HumidTempViewSet(viewsets.ModelViewSet):
 class MoistureViewSet(viewsets.ModelViewSet):
     queryset = Moisture.objects.all()
     serializer_class = MoistureSerializer
-    filterset_fields = ["value", "sensor"]
+    filterset_fields = ["moisture"]
 
     def perform_create(self, serializer):
         sensor = self.request.data.get('sensor') # get sensor's name

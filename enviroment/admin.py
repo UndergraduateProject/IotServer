@@ -1,14 +1,24 @@
 from django.contrib import admin
-from enviroment.models import Sensor, Humid_Temp, Moisture, PlantImg
+from enviroment.models import Sensor, HumidTemp, Moisture, PlantImg
 # Register your models here.
 
-class Humid_TempAdmin(admin.ModelAdmin):
-    readonly_fields = ('created',)
+class SensorAdmin(admin.ModelAdmin):
+    readonly_fields = ('created', )
+
+
+class HumidTempAdmin(admin.ModelAdmin):
+    readonly_fields = ('timestamp',)
+
 
 class MoistureAdmin(admin.ModelAdmin):
-    readonly_fields = ('created',)
+    readonly_fields = ('timestamp',)
 
-admin.site.register(Sensor)
-admin.site.register(Humid_Temp,Humid_TempAdmin)
+
+class PlantImgAdmin(admin.ModelAdmin):
+    readonly_fields = ('timestamp',)
+
+
+admin.site.register(Sensor, SensorAdmin)
+admin.site.register(HumidTemp,HumidTempAdmin)
 admin.site.register(Moisture,MoistureAdmin)
-admin.site.register(PlantImg)
+admin.site.register(PlantImg, PlantImgAdmin)
