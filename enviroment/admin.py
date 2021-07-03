@@ -19,6 +19,6 @@ class PlantImgAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Sensor, SensorAdmin)
-admin.site.register(HumidTemp,HumidTempAdmin)
-admin.site.register(Moisture,MoistureAdmin)
+admin.site.register(HumidTemp, HumidTempAdmin)
+admin.site.register(Moisture, MoistureAdmin)
 admin.site.register(PlantImg, PlantImgAdmin)

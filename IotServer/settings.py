@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken', 
     "enviroment.apps.EnviromentConfig",
     "user.apps.UserConfig",
+    "controller.apps.ControllerConfig"    
 ]
 
 MIDDLEWARE = [
