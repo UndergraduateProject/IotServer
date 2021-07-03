@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet, PlantImgViewSet
+from controller.views import WateringViewSet, LEDViewSet, FanViewSet, ActionConditionViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,12 +25,17 @@ from django.conf.urls.static import static
 router = DefaultRouter()
 
 # enviroment urls
-router.register(r'sensor', SensorViewSet)
-router.register(r'humidtemp', HumidTempViewSet)
-router.register(r'moisture', MoistureViewSet)
-router.register(r'plantimg', PlantImgViewSet)
+router.register(r'Sensor', SensorViewSet)
+router.register(r'Humidtemp', HumidTempViewSet)
+router.register(r'Moisture', MoistureViewSet)
+router.register(r'Plantimg', PlantImgViewSet)
 
-# client urls
+# controller urls
+router.register(r'Wartering', WateringViewSet)
+router.register(r'LED', LEDViewSet)
+router.register(r'Fan', FanViewSet)
+router.register(r'ActionCondition', ActionConditionViewSet)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),

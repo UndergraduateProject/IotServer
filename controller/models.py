@@ -11,7 +11,7 @@ CONDITION_TYPE_CHOICE = [
 ]
 
 CONDITION_MODE_CHOICE = [
-    ('deault', 'default'),
+    ('default', 'default'),
     ('manual', 'manual')
 ]
 
@@ -58,9 +58,9 @@ class Fan(models.Model):
 
 class ActionCondition(models.Model):
     controller = models.ForeignKey(Controller, related_name='action_condition', on_delete=models.PROTECT)
-    moisture = models.FloatField() 
-    volumne = models.FloatField()
-    temperature = models.FloatField()
+    moisture = models.FloatField(default=-1) 
+    volume = models.FloatField(default=-1)
+    temperature = models.FloatField(default=-1)
     mode = models.CharField(max_length=10, choices=CONDITION_MODE_CHOICE)
     type = models.CharField(max_length=10, choices=CONDITION_TYPE_CHOICE)
     created_at = models.DateTimeField(auto_now_add=True)
