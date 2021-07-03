@@ -26,15 +26,25 @@ conda env update --file environment.yml    ## update env packages
 ```
 
 ## utils API
+
+### watering
+```
+url -> http://127.0.0.1:8000/utils/mail_certification/
+method -> POST
+data -> volum  #這邊要在思考需要甚麼data
+response -> {INFO : 'message'}
+```
+
 ### mail certification
 ```
 url -> http://140.117.71.98:8000/utils/mail_certification/
 method -> POST
 data -> mail
-response -> {success : 是否成功寄出認證信件}
+response -> {INFO : 'message'}
 ```
 
 ## auth API
+
 ### register
 ```
 url -> http://140.117.71.98:8000/user/register/
@@ -43,6 +53,7 @@ data -> username, password, email
 response -> {user : user detail} 
 response fail -> {use}
 ```
+
 ### login
 ```
 url -> http://140.117.71.98:8000/user/register/
@@ -50,6 +61,7 @@ method -> POST
 data -> username, password
 response -> {user : user detail, token : a hash number}
 ```
+
 ### logout
 ```
 url : http://140.117.71.98:8000/user/register/
@@ -60,5 +72,5 @@ response -> {}
 
 ## some notes
 > hyperlink 所對應的attr必須和models裡面定義的一樣
-> warning!!! code不可以有print，不然run background會報錯!!!
+> code不可以有print，不然run background會報錯
 
