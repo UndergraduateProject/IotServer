@@ -1,3 +1,4 @@
+from functools import partial
 from rest_framework import serializers, viewsets
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
@@ -56,12 +57,26 @@ class ActionConditionViewSet(viewsets.ModelViewSet):
         controller = get_object_or_404(Controller, name=controller)
         serializer.save(controller=controller)
     
-    # @action(detail=False, methods=['patch'])
-    # def testing(self, request, pk=None):
-    #     mode = request.data.get('mode')
-    #     type = request.data.get('type')        
-    #     action_condition = get_object_or_404(ActionCondition, mode=mode, type=type)
-    #     serializer = self.get_serializer(action_condition)
-    #     serializer.save
-    #     print('tesing')
-    #     return Response({'testing':serializer.data})
+    @action(detail=False, methods=['put'])
+    def updateCondition(self, request, pk=None):
+        mode = request.data.get('mode')
+        type = request.data.get('type')        
+        action_condition = get_object_or_404(ActionCondition, mode=mode, type=type)
+        if type == 'watering':
+            action_condition.temperature = -1
+        else:
+            action_condition.moisture = -1
+            action_condition.volume = -1
+        serializer = self.get_serializer(action_condition, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'testing':serializer.data})
+    
+    def update(self, request, *args, **kwargs):
+        mode = request.data.get('mode')
+        type = request.data.get('type')
+        instance = get_object_or_404(ActionCondition, mode=mode, type=type)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
