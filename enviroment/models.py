@@ -1,6 +1,5 @@
 from django.db import models
-from datetime import timedelta
-#from django.contrib.auth.models import User
+from datetime import timedelta, timezone
 
 class Sensor(models.Model):
     user = models.ForeignKey('auth.User', related_name ='sensor', on_delete=models.PROTECT)
@@ -21,7 +20,7 @@ class HumidTemp(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.timestamp)
+        return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))
 
 
 class Moisture(models.Model):
@@ -30,7 +29,7 @@ class Moisture(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str(self.timestamp)
+        return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))
 
 def imghelper(instance, filename):
     return instance.created.strftime('%Y/')+instance.created.strftime('%m%d/')+instance.created.strftime('%H%M')+'.jpg'
@@ -41,4 +40,4 @@ class PlantImg(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.timestamp)
+        return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))
