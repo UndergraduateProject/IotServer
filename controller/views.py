@@ -48,9 +48,6 @@ class FanViewSet(viewsets.ModelViewSet):
 class ActionConditionViewSet(viewsets.ModelViewSet):
     queryset = ActionCondition.objects.all()
     serializer_class = ActionConditionSerializer
-    filterset_fields = ["mode","type"]
-    #lookup_field = "mode"
-    #lookup_value_regex = "[^/]+"  
 
     def perform_create(self, serializer):
         controller = self.request.data.get('controller') # get controller's name
@@ -71,12 +68,3 @@ class ActionConditionViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({'testing':serializer.data})
-    
-    def update(self, request, *args, **kwargs):
-        mode = request.data.get('mode')
-        type = request.data.get('type')
-        instance = get_object_or_404(ActionCondition, mode=mode, type=type)
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-        return Response(serializer.data)
