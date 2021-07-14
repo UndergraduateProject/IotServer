@@ -15,6 +15,11 @@ CONDITION_MODE_CHOICE = [
     ('manual', 'manual')
 ]
 
+CONDITION_OPERATOR_CHOICE = [
+    ('<', '<'),
+    ('>', '<')
+]
+
 class Controller(models.Model):
     user = models.ForeignKey('auth.User', related_name ='controller', on_delete=models.PROTECT)
     name = models.CharField(primary_key=True, max_length=128)
@@ -68,3 +73,11 @@ class ActionCondition(models.Model):
 
     def __str__(self):
         return "{} -> {}".format(self.mode, self.type)
+
+class WarningCondition(models.Model):
+    user = models.ForeignKey('auth.User', related_name ='sensor', on_delete=models.PROTECT)
+    moisture = models.FloatField()
+    humidity = models.FloatField()
+    temperature = models.FloatField()
+    operator = models.CharField(max_length=1, choices=CONDITION_OPERATOR_CHOICE)
+    status = models.CharField(max_length=1, choices=SWITCH_CHOICE)

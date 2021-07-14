@@ -31,6 +31,7 @@ class Moisture(models.Model):
     def __str__(self):
         return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))
 
+ 
 def imghelper(instance, filename):
     return instance.created.strftime('%Y/')+instance.created.strftime('%m%d/')+instance.created.strftime('%H%M')+'.jpg'
 
