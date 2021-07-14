@@ -75,9 +75,9 @@ class ActionCondition(models.Model):
         return "{} -> {}".format(self.mode, self.type)
 
 class WarningCondition(models.Model):
-    user = models.ForeignKey('auth.User', related_name ='sensor', on_delete=models.PROTECT)
+    user = models.ForeignKey('auth.User', related_name ='warning_condition', on_delete=models.PROTECT)
     moisture = models.FloatField()
     humidity = models.FloatField()
     temperature = models.FloatField()
     operator = models.CharField(max_length=1, choices=CONDITION_OPERATOR_CHOICE)
-    status = models.CharField(max_length=1, choices=SWITCH_CHOICE)
+    status = models.CharField(max_length=3, choices=SWITCH_CHOICE)

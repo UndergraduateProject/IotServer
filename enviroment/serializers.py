@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from enviroment.models import Sensor, HumidTemp, Moisture, PlantImg
-from django.contrib.auth.models import User
+from enviroment.models import Sensor, HumidTemp, Moisture, PlantImg, PlantYoloCropImg
 
 
 class SensorSerializer(serializers.ModelSerializer):
@@ -32,3 +31,9 @@ class PlantImgSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlantImg
         fields = ["id", "image", "timestamp"]
+
+class PlantYoloCropImgSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PlantYoloCropImg
+        fields = ['id', 'image', 'prob', 'timestamp']

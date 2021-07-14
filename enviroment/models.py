@@ -1,3 +1,4 @@
+from functools import partial
 from django.db import models
 from datetime import timedelta, timezone
 
@@ -33,11 +34,28 @@ class Moisture(models.Model):
 
  
 def imghelper(instance, filename):
-    return instance.created.strftime('%Y/')+instance.created.strftime('%m%d/')+instance.created.strftime('%H%M')+'.jpg'
+    timestamp = instance.timestamp + timedelta(hours=8)
+    if 'RAW' in filename:
+        return timestamp.strftime('%Y/')+timestamp.strftime('%m%d/')+timestamp.strftime('%H:%M:%S_YOLO')+'.jpg'
+    return timestamp.strftime('%Y/')+timestamp.strftime('%m%d/')+timestamp.strftime('%H:%M:%S_RAW')+'.jpg'
 
 class PlantImg(models.Model):
     sensor = models.ForeignKey(Sensor, related_name="plantimg", on_delete=models.PROTECT)
+    timestamp = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to=imghelper)
+    yolo_image = models.ImageField(upload_to=imghelper, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))
+
+
+def plantimgcrophelper(instance, filename):
+    return instance.plantimg.timestamp.strftime('%Y/')+instance.timestamp.strftime('%m%d/')+instance.timestamp.strftime('%H:%M:%S_crop/')+'{}.jpg'.format(instance.id)
+
+class PlantYoloCropImg(models.Model):
+    plantimg = models.ForeignKey(PlantImg, related_name="plant_yolo_crop", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=plantimgcrophelper)
+    prob = models.FloatField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
