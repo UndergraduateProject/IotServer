@@ -54,7 +54,7 @@ class PlantImgViewSet(viewsets.ModelViewSet):
         plantimage = serializer.save(sensor=sensor)
 
         yolo_cmd = 'python detect.py --source ../media/{} --weights best.pt'.format(plantimage.image) # append full path
-        os.chdir('yolov5')
+        os.chdir('yolo_v5')
         res = os.system(yolo_cmd) # if success, get 0
         plantimage_path = str(plantimage.image).split('/')[-1]  # get plantimage file name
         yolo_image = open(f'runs/detect/exp/{plantimage_path}', 'rb') # yolo result
