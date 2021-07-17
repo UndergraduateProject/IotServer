@@ -13,7 +13,9 @@ from enviroment.serializers import (
 )
 
 import os
-from django.core.files import File 
+import pathlib
+from leafmodel.leafillness import leaf_predict
+from django.core.files.images import ImageFile
 
 class SensorViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
@@ -48,27 +50,37 @@ class PlantImgViewSet(viewsets.ModelViewSet):
     queryset = PlantImg.objects.all()
     serializer_class = PlantImgSerializer
 
+    '''
+    1. 收到RAW image後先儲存
+    2. call yolo model將產生的圖片更新到原本的model object裡
+    3. 將yolo crops經過leaf illness model後儲存
+    '''
     def perform_create(self, serializer):
         sensor = self.request.data.get('sensor') # get sensor's name
         sensor = get_object_or_404(Sensor, name=sensor)
         plantimage = serializer.save(sensor=sensor)
 
-        yolo_cmd = 'python detect.py --source ../media/{} --weights best.pt'.format(plantimage.image) # append full path
-        os.chdir('yolo_v5')
+        # generate yolo image
+        yolo_cmd = 'python detect.py --source ../media/{} --save-crop --weights best.pt'.format(plantimage.image) # append full path
+        cur_path = pathlib.Path(__file__).parent.absolute() # get current path
+        os.chdir(cur_path.parents[0] / 'yolo_v5')
         res = os.system(yolo_cmd) # if success, get 0
-        plantimage_path = str(plantimage.image).split('/')[-1]  # get plantimage file name
-        yolo_image = open(f'runs/detect/exp/{plantimage_path}', 'rb') # yolo result
+        plantimage_path = str(plantimage.image).split('/')[-1]  # get RAW plantimage file name
+        yolo_image = open(f'runs/detect/exp/{plantimage_path}', 'rb') # read yolo image
         plantimage.yolo_image.save(plantimage_path, yolo_image) # update yolo image
         if res:
-            return Response({'detail' : 'Erro on yolo command'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR) # erro happened
+            return Response({'detail' : 'Error on yolo command'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR) # erro happened
         
+        # save crops
+        crops_path = './runs/detect/exp/crops/leaf/'
+        for leaf_crop in os.listdir(crops_path):
+            crop_leaf_path = os.path.join(crops_path,leaf_crop)
+            # leaf illness model
+            res = leaf_predict(crop_leaf_path)
+            PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), prob=10) 
+            os.remove(crop_leaf_path)            
 
-class HumidTempViewSet(viewsets.ModelViewSet):
+class PlantYoloCropImgViewSet(viewsets.ModelViewSet):
     queryset = PlantYoloCropImg.objects.all()
     serializer_class = PlantYoloCropImgSerializer
     filterset_fields = ["plantimg__timestamp", 'prob']
-
-    def perform_create(self, serializer):
-        img_id = self.request.data.get('plantimg') # get sensor's name
-        plantimg = get_object_or_404(PlantImg, id=img_id)
-        serializer.save(plantimg=plantimg)

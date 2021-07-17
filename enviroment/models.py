@@ -50,13 +50,14 @@ class PlantImg(models.Model):
 
 
 def plantimgcrophelper(instance, filename):
-    return instance.plantimg.timestamp.strftime('%Y/')+instance.timestamp.strftime('%m%d/')+instance.timestamp.strftime('%H:%M:%S_crop/')+'{}.jpg'.format(instance.id)
+    timestamp = instance.plantimg.timestamp + timedelta(hours=8)
+    return timestamp.strftime('%Y/')+timestamp.strftime('%m%d/')+timestamp.strftime('%H%M%S_crop/')+filename.split('/')[-1]
 
 class PlantYoloCropImg(models.Model):
     plantimg = models.ForeignKey(PlantImg, related_name="plant_yolo_crop", on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=plantimgcrophelper)
     prob = models.FloatField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to=plantimgcrophelper)
 
     def __str__(self):
         return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))
