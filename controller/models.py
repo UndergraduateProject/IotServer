@@ -1,3 +1,4 @@
+from os import environ
 from django.db import models
 
 SWITCH_CHOICE = [
@@ -81,3 +82,10 @@ class WarningCondition(models.Model):
     temperature = models.FloatField()
     operator = models.CharField(max_length=1, choices=CONDITION_OPERATOR_CHOICE)
     status = models.CharField(max_length=3, choices=SWITCH_CHOICE)
+
+
+class Plant(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=300)
+    environment = models.CharField(max_length=300)
+    livespan = models.FloatField()
