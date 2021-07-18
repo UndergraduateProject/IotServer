@@ -51,6 +51,8 @@ class PlantImg(models.Model):
 
 def plantimgcrophelper(instance, filename):
     timestamp = instance.plantimg.timestamp + timedelta(hours=8)
+    if 'cam++' in filename:
+        return timestamp.strftime('%Y/')+timestamp.strftime('%m%d/')+timestamp.strftime('%H%M%S_crop/')+'cam++'+filename.split('/')[-1]
     return timestamp.strftime('%Y/')+timestamp.strftime('%m%d/')+timestamp.strftime('%H%M%S_crop/')+filename.split('/')[-1]
 
 class PlantYoloCropImg(models.Model):
@@ -58,6 +60,7 @@ class PlantYoloCropImg(models.Model):
     prob = models.FloatField()
     timestamp = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to=plantimgcrophelper)
+    gradcam_image = models.ImageField(upload_to=plantimgcrophelper)
 
     def __str__(self):
         return str(self.timestamp.astimezone(timezone(timedelta(hours=8))))

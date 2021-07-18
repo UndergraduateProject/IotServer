@@ -71,13 +71,21 @@ class PlantImgViewSet(viewsets.ModelViewSet):
         if res:
             return Response({'detail' : 'Error on yolo command'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR) # erro happened
         
+        # change path to gradcam
+        os.chdir(cur_path.parents[0] / 'gradcam')
         # save crops
-        crops_path = './runs/detect/exp/crops/leaf/'
-        for leaf_crop in os.listdir(crops_path):
-            crop_leaf_path = os.path.join(crops_path,leaf_crop)
+        crops_path = '../yolo_v5/runs/detect/exp/crops/leaf/'
+        for crop_leaf_name in os.listdir(crops_path):
+            crop_leaf_path = os.path.join(crops_path,crop_leaf_name)
             # leaf illness model
-            res = leaf_predict(crop_leaf_path)
-            PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), prob=10) 
+            result = leaf_predict(crop_leaf_path)
+            # grad cam 
+            print('-'*30)
+            print(crop_leaf_path)
+            gradcam_cmd = f'python main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/leafillness.pt'
+            os.system(gradcam_cmd) 
+            PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), 
+                                            gradcam_image=ImageFile(open('results/'+crop_leaf_name.split('.')[0]+'-resnet50-cam++.jpg', 'rb')), prob=10) 
             os.remove(crop_leaf_path)            
 
 class PlantYoloCropImgViewSet(viewsets.ModelViewSet):
