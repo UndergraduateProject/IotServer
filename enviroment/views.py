@@ -82,9 +82,11 @@ class PlantImgViewSet(viewsets.ModelViewSet):
             # grad cam 
             gradcam_cmd = f'python main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/leafillness.pt'
             os.system(gradcam_cmd) 
+            cam_leaf_path = 'results/'+crop_leaf_name.split('.')[0]+'-resnet50-cam++.jpg'
             PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), 
-                                            gradcam_image=ImageFile(open('results/'+crop_leaf_name.split('.')[0]+'-resnet50-cam++.jpg', 'rb')), prob=10) 
-            os.remove(crop_leaf_path)            
+                                            gradcam_image=ImageFile(open(cam_leaf_path, 'rb')), prob=10) 
+            os.remove(crop_leaf_path)
+            os.remove(cam_leaf_path)     
 
 class PlantYoloCropImgViewSet(viewsets.ModelViewSet):
     queryset = PlantYoloCropImg.objects.all()
