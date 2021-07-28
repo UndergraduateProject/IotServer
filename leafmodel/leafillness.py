@@ -74,4 +74,5 @@ def leaf_predict(path):
 if __name__ == '__main__':
     
     res = leaf_predict('leaf.JPG')
-    print(res)
+    for k, v in res.items():
+        print(f'{k} -> {round(v,5)}')

@@ -41,7 +41,12 @@ io.on("connection", (socket) => {
         console.log('get messsage');
         socket.broadcast.emit('rtc-message', message);
     })
-
+    
+    // prgress message
+    // for image analyze 
+    socket.on("progress", message => {
+        socket.broadcast.emit('progress', message);
+    })
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

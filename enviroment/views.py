@@ -16,6 +16,8 @@ import os
 import pathlib
 from leafmodel.leafillness import leaf_predict
 from django.core.files.images import ImageFile
+import socketio
+import json
 
 class SensorViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
@@ -60,14 +62,19 @@ class PlantImgViewSet(viewsets.ModelViewSet):
         sensor = get_object_or_404(Sensor, name=sensor)
         plantimage = serializer.save(sensor=sensor)
 
+        # set up socket
+        sio = socketio.Client()
+        sio.connect('http://140.117.71.98:4001')
         # generate yolo image
-        yolo_cmd = 'python detect.py --source ../media/{} --save-crop --weights best.pt'.format(plantimage.image) # append full path
+        yolo_cmd = 'python detect.py --source ../media/{} --save-crop --weights best.pt'.format(plantimage.image)
         cur_path = pathlib.Path(__file__).parent.absolute() # get current path
         os.chdir(cur_path.parents[0] / 'yolo_v5')
-        res = os.system(yolo_cmd) # if success, get 0
+        res = os.system(yolo_cmd) # excute yolo command
         plantimage_path = str(plantimage.image).split('/')[-1]  # get RAW plantimage file name
         yolo_image = open(f'runs/detect/exp/{plantimage_path}', 'rb') # read yolo image
-        plantimage.yolo_image.save(plantimage_path, yolo_image) # update yolo image
+        plantimage.yolo_image.save(plantimage_path, yolo_image) # save yolo image
+        sio.emit('progress', {'raw_image':plantimage.image.url, 'yolo_image':plantimage.yolo_image.url})
+
         if res:
             return Response({'detail' : 'Error on yolo command'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR) # erro happened
         
@@ -75,18 +82,23 @@ class PlantImgViewSet(viewsets.ModelViewSet):
         os.chdir(cur_path.parents[0] / 'gradcam')
         # save crops
         crops_path = '../yolo_v5/runs/detect/exp/crops/leaf/'
-        for crop_leaf_name in os.listdir(crops_path):
+        crops_num = len(os.listdir(crops_path))
+        # create socket
+        sio.emit('progress', {'total':crops_num})
+
+        for i, crop_leaf_name in enumerate(os.listdir(crops_path)):
             crop_leaf_path = os.path.join(crops_path,crop_leaf_name)
-            # leaf illness model
-            result = leaf_predict(crop_leaf_path)
-            # grad cam 
+            # leaf illness model 
+            result = leaf_predict(crop_leaf_path) # leaf illness prediction
             gradcam_cmd = f'python main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/leafillness.pt'
-            os.system(gradcam_cmd) 
+            os.system(gradcam_cmd) # excute gradcam 
             cam_leaf_path = 'results/'+crop_leaf_name.split('.')[0]+'-resnet50-cam++.jpg'
-            PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), 
+            crop_img = PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), 
                                             gradcam_image=ImageFile(open(cam_leaf_path, 'rb')), prob=10) 
+            sio.emit('progress', {'current':i+1, 'crop_image':crop_img.image.url, 'cam_image':crop_img.gradcam_image.url, 'prediction':json.dumps(result)})
             os.remove(crop_leaf_path)
-            os.remove(cam_leaf_path)     
+            os.remove(cam_leaf_path)   
+        sio.disconnect()  
 
 class PlantYoloCropImgViewSet(viewsets.ModelViewSet):
     queryset = PlantYoloCropImg.objects.all()

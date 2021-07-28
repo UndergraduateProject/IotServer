@@ -4,12 +4,13 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from controller.models import Controller, Watering, LED, Fan, ActionCondition
+from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant
 from controller.serializers import (
     WateringSerializer,
     LEDSerializer,
     FanSerializer,
     ActionConditionSerializer,
+    PlantSerializer,
 )
 
 
@@ -68,3 +69,8 @@ class ActionConditionViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({'testing':serializer.data})
+
+
+class PlantViewSet(viewsets.ModelViewSet):
+    queryset = Plant.objects.all()
+    serializer_class = PlantSerializer
