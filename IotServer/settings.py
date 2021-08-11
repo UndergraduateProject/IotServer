@@ -145,7 +145,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'http//:localhost:3000',
+    'http://localhost:3000',
 )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
