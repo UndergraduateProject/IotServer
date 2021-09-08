@@ -47,6 +47,21 @@ io.on("connection", (socket) => {
     socket.on("progress", message => {
         socket.broadcast.emit('progress', message);
     })
+
+    //LED
+    socket.on("light", msg => {
+        socket.broadcast.emit("light",msg)
+    })
+    
+    //water
+    socket.on("water", msg => {
+        socket.broadcast.emit("water",msg)
+    })
+
+    //slider
+    socket.on("slider", msg => {
+        socket.broadcast.emit("slider",msg)
+    })
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
