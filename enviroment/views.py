@@ -47,7 +47,7 @@ class MoistureViewSet(viewsets.ModelViewSet):
         serializer.save(sensor=sensor)
 
         
-
+  
 class PlantImgViewSet(viewsets.ModelViewSet):
     queryset = PlantImg.objects.all()
     serializer_class = PlantImgSerializer

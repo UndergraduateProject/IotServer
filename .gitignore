@@ -16,3 +16,6 @@ media/
 
 # .pt file
 *.pt
+
+# ignore cam images
+gradcam/results/
