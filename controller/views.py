@@ -4,13 +4,17 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant
+from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition
 from controller.serializers import (
     WateringSerializer,
     LEDSerializer,
     FanSerializer,
     ActionConditionSerializer,
     PlantSerializer,
+    ElectricitySerializer,
+    TrackSerializer,
+    WaterStorageSerializer,
+    WarningConditionSerializer,
 )
 
 
@@ -71,6 +75,26 @@ class ActionConditionViewSet(viewsets.ModelViewSet):
         return Response({'testing':serializer.data})
 
 
+class WarningConditionViewSet(viewsets.ModelViewSet):
+    queryset = WarningCondition.objects.all()
+    serializer_class = WarningConditionSerializer
+
+
 class PlantViewSet(viewsets.ModelViewSet):
     queryset = Plant.objects.all()
     serializer_class = PlantSerializer
+
+
+class ElectricityViewSet(viewsets.ModelViewSet):
+    queryset = Electricity.objects.all()
+    serializer_class = ElectricitySerializer
+
+
+class TrackViewSet(viewsets.ModelViewSet):
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer
+
+
+class WaterStorageViewSet(viewsets.ModelViewSet):
+    queryset = WaterStorage.objects.all()
+    serializer_class = WaterStorageSerializer

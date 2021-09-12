@@ -17,7 +17,16 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from enviroment.views import SensorViewSet, HumidTempViewSet, MoistureViewSet, PlantImgViewSet
-from controller.views import WateringViewSet, LEDViewSet, FanViewSet, ActionConditionViewSet, PlantViewSet
+from controller.views import (
+    WateringViewSet, 
+    LEDViewSet, 
+    FanViewSet, 
+    ActionConditionViewSet, 
+    PlantViewSet,
+    ElectricityViewSet,
+    TrackViewSet,
+    WaterStorageViewSet
+    )
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -41,6 +50,9 @@ router.register(r'LED', LEDViewSet)
 router.register(r'Fan', FanViewSet)
 router.register(r'ActionCondition', ActionConditionViewSet)
 router.register(r'Plant', PlantViewSet)
+router.register(r'Electricity', ElectricityViewSet)
+router.register(r'Track', TrackViewSet)
+router.register(r'WaterStorage', WaterStorageViewSet)
 
 
 schema_view = get_schema_view(

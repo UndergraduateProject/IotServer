@@ -19,3 +19,6 @@ media/
 
 # ignore cam images
 gradcam/results/
+
+# ignore old database
+db_old.sqlite3

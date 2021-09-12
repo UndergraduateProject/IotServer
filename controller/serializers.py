@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from controller.models import Watering, LED, Fan, ActionCondition, Plant
+from controller.models import Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition
 from django.contrib.auth.models import User
 
 class WateringSerializer(serializers.ModelSerializer):
@@ -29,8 +29,35 @@ class ActionConditionSerializer(serializers.ModelSerializer):
         model = ActionCondition
         fields = ['id', 'moisture', 'volume', 'temperature', 'mode', 'type', 'created_at', 'update_at']
 
+
 class PlantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Plant
         fields = ['id', 'name', 'description', 'environment', 'livespan']
+
+class WarningConditionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = WarningCondition
+        fields = ['__all__']
+
+class ElectricitySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Electricity
+        fields = ['__all__']
+
+
+class TrackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Track
+        fields = ['__all__']
+
+
+class WaterStorageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = WaterStorage
+        fields = ['__all__']
