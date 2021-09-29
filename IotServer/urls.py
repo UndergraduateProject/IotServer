@@ -22,6 +22,7 @@ from controller.views import (
     LEDViewSet, 
     FanViewSet, 
     ActionConditionViewSet, 
+    WarningConditionViewSet,
     PlantViewSet,
     ElectricityViewSet,
     TrackViewSet,
@@ -49,6 +50,7 @@ router.register(r'Wartering', WateringViewSet)
 router.register(r'LED', LEDViewSet)
 router.register(r'Fan', FanViewSet)
 router.register(r'ActionCondition', ActionConditionViewSet)
+router.register(r'WarningCondition', WarningConditionViewSet)
 router.register(r'Plant', PlantViewSet)
 router.register(r'Electricity', ElectricityViewSet)
 router.register(r'Track', TrackViewSet)

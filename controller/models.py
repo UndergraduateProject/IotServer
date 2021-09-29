@@ -19,7 +19,7 @@ CONDITION_MODE_CHOICE = [
 
 CONDITION_OPERATOR_CHOICE = [
     ('<', '<'),
-    ('>', '<')
+    ('>', '>')
 ]
 
 class Controller(models.Model):
