@@ -40,24 +40,24 @@ class WarningConditionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WarningCondition
-        fields = ['__all__']
+        fields = '__all__'
 
 class ElectricitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Electricity
-        fields = ['__all__']
+        fields = '__all__'
 
 
 class TrackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = ['__all__']
+        fields = '__all__'
 
 
 class WaterStorageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WaterStorage
-        fields = ['__all__']
+        fields = '__all__'

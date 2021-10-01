@@ -69,6 +69,7 @@ class ActionCondition(models.Model):
     humidity = models.FloatField(default=-1)
     temperature = models.FloatField(default=-1)
     brightness = models.FloatField(default=-1)
+    volume = models.FloatField(default=-1)
     mode = models.CharField(max_length=10, choices=CONDITION_MODE_CHOICE) # default or manual 
     type = models.CharField(max_length=10, choices=CONDITION_TYPE_CHOICE) # watering or fan
     status = models.CharField(max_length=3, choices=SWITCH_CHOICE, default='OFF') # on or off
@@ -86,6 +87,7 @@ class WarningCondition(models.Model):
     humidity = models.FloatField(default=-1)
     temperature = models.FloatField(default=-1)
     brightness = models.FloatField(default=-1)
+    volume = models.FloatField(default=-1)
     status = models.CharField(max_length=3, choices=SWITCH_CHOICE)
     operator = models.CharField(max_length=1, choices=CONDITION_OPERATOR_CHOICE)
     created_at = models.DateTimeField(auto_now_add=True)
