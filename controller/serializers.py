@@ -27,7 +27,7 @@ class ActionConditionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ActionCondition
-        fields = ['id', 'moisture', 'volume', 'temperature', 'mode', 'type', 'created_at', 'update_at']
+        fields = '__all__'
 
 
 class PlantSerializer(serializers.ModelSerializer):
