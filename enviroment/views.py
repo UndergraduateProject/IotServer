@@ -66,7 +66,7 @@ class PlantImgViewSet(viewsets.ModelViewSet):
         sio = socketio.Client()
         sio.connect('http://140.117.71.98:4001')
         # generate yolo image
-        yolo_cmd = 'python detect.py --source ../media/{} --save-crop --weights best.pt'.format(plantimage.image)
+        yolo_cmd = 'python3 detect.py --source ../media/{} --save-crop --weights best.pt'.format(plantimage.image)
         cur_path = pathlib.Path(__file__).parent.absolute() # get current path
         os.chdir(cur_path.parents[0] / 'yolo_v5')
         res = os.system(yolo_cmd) # excute yolo command
@@ -90,7 +90,7 @@ class PlantImgViewSet(viewsets.ModelViewSet):
             crop_leaf_path = os.path.join(crops_path,crop_leaf_name)
             # leaf illness model 
             result = leaf_predict(crop_leaf_path) # leaf illness prediction
-            gradcam_cmd = f'python main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/leafillness.pt'
+            gradcam_cmd = f'python3 main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/leafillness.pt'
             os.system(gradcam_cmd) # excute gradcam 
             cam_leaf_path = 'results/'+crop_leaf_name.split('.')[0]+'-resnet50-cam++.jpg'
             crop_img = PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), 
