@@ -62,6 +62,11 @@ io.on("connection", (socket) => {
     socket.on("slider", msg => {
         socket.broadcast.emit("slider",msg)
     })
+
+    //fan
+    socket.on("fan", msg =>{
+        socket.broadcast.emit("fan",msg)
+    })
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
