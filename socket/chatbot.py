@@ -3,13 +3,13 @@ import dialogflow
 from google.api_core.exceptions import InvalidArgument
 import requests as rq
 import socketio
-url = 'http://140.117.71.98:8000/api/Humidtemp/'
-res = rq.get(url)
+src = 'http://140.117.71.98:8000/api/Humidtemp/'
+
 
 #socket
 sio = socketio.Client()
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '/Users/shunkingsiu/Desktop/djangochatbot/reactpageagent-rehl-e8f6c376b8ef.json'
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = './reactpageagent-rehl-e8f6c376b8ef.json'
 DIALOGFLOW_PROJECT_ID = 'reactpageagent-rehl'
 DIALOGFLOW_LANGUAGE_CODE = 'en'
 SESSION_ID = 'ni_chatbot'
@@ -35,18 +35,36 @@ def get_input(text_to_be_analyzed="ni_chatbot"):
 
 # display
 def temperature():
-    print(response.query_result.fulfillment_text, "{}")
-    #{restful api data} 
+    res = rq.get(src)
+    data = res.json()
+    count = data["count"]
+    url = src + str(count)
+    res = rq.get(url)
+    data = res.json()
+    temperature = data['temperature']
+    msg = response.query_result.fulfillment_text + str(temperature)
+    sio.emit('chatbot', msg)
+    print(response.query_result.fulfillment_text, temperature)
+
 def humidity():
-    print(response.query_result.fulfillment_text, "{}")
-    #{restful api data} 
-    #print(res.text)
+    res = rq.get(src)
+    data = res.json()
+    count = data["count"]
+    url = src + str(count)
+    res = rq.get(url)
+    data = res.json()
+    humidity = data['humidity']
+    msg = response.query_result.fulfillment_text + str(humidity)
+    sio.emit('chatbot', msg)
+    print(response.query_result.fulfillment_text, humidity)
 
 # action
-def  action_watering():
-     print("action_watering ")
+def action_watering():
+    print("action_watering ")
+
 def action_light():
     print("action_watering")
+    
 def action_fan():
     print("action_fan")
 
@@ -63,8 +81,8 @@ def on_connect():
 
 @sio.on("chatbot")
 def on_message(data):
-    print('message received with ', data)
-    response = get_input(input(data))
+    global response
+    response = get_input(data)
     get_output(response)
     print("keyword: ", response.query_result.intent.display_name)
     #command+shift+p -> interpreter-> copy bin/python
@@ -92,5 +110,7 @@ def on_message(data):
 def on_disconnect():
     print('disconnected from server')
 
+sio.connect("http://140.117.71.98:4001")
+
 while True:
-    
+    None

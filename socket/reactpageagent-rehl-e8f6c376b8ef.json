@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "reactpageagent-rehl",
+  "private_key_id": "e8f6c376b8efb57352c7b5f71041a18bd4e67ea9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDJEVEG04lnSsfc\nuMH9IaF6g9mkvLZ3j5eoQJCF4qkVEL8upDotgw3licC6eQ2vit62e6TJBN+evXg0\nEuDUDOEaeeA+jRmZco30Y+sB6Y0gXtIzQ/8cTBXWIGaKMb756jQv6gfJ0RLy2gE9\nHlndTOIFEbUwBr1R0OQRK1DAUERqHxkgcHKG23sR89A+MTNwwt/0cTGp7e7qwTe6\n+6XWQMzVtQ0Mwvy+UX3TGZaeVZki3fXmJX0fZGk7261iFfoUz4mWuofv/pBMvVvG\nMxpQo/fyhye4EN8A52871eIydPKSUA1DtYZ+b4/BgTxqC7mh3hz161T5MuZg+32t\nQFYv7Ca5AgMBAAECggEABV66BvBQDiXYJVP7PQh7PetsPP3GncuEUGZmYGeyU7Fe\necoXEloaspO1mwVapo0973++jJkzDmlJtD0A1jOrMMAqi2EiBZAirHFIDdqv/eT/\nwNttt9LBuTX6Ucc3A4kMGxopWmwuu7UI2BoJv7hVnQRhDhxP+BxtIEGY5tn99HDo\ns822OxHVCftSvqCbO/YCQnkIiiaXDYf41HZtyD2s1zQR+0eUbm2z/5NjGnFMaHK3\nOZt5DTKjHANDXjgA/M8Jn9m24/14nD6PbO/swg8D5cO5p8LfuWqt0BsUap/NYDth\nSmv819xgGoCBhgFbY7D7NcLrtVHFO+JWnvnpWvKE9QKBgQDzYq+icfmKV3t/uWse\n+RF7Gg6kJHUTOd/OFV7YSh5u1y32lbRaKYluaSHnsKOpCkMpwclsfGjfb1501n26\nJAtGdcUHZHd/SUAnVk1R2tlA/WWc48hU9fx1ejNeH8MLEtSoQ1s/TDqq3NswfvdV\nisSwvNzclP/kvB0IU67mY+iobwKBgQDTfSTlnQoYu5ZJ5UCqDhukdBudrilckzw8\nGN/mQ7ftoyEq8FIBNXNQgbPRX2zHnqgCKVPsqBkvBhvnWbcUewaAn0a2jrE/RdEC\nloHWBAlRx4FHoC/ZICnuL0uP9pTZA3E57tvGafKYhAd/03O9+6Vn6+knkryaVsf1\nVAepfe4nVwKBgQDB6zpXawpRYJykyp6AIiD8fWl2/RlPBUi90actG/kdhVM46lS1\nlezLTPbXvJTZpbSXu7B6QLHqfLi8zP2F5xwYutMOrczMXRfBf/DBLGb3ci6ZD6BZ\nmVjaXVA6SYJE+2721hwI1frUkn4OKMt2m8dVrlUnZ4xvujZDoTF0ndwM/wKBgQCy\nBlML0cCRBz9AXvGq9ItCSNaCSfvZSLtYn1vCGlj2ee5OldOB3vt91mCGq3wHIT+t\n6hoSSYJBejP88CFT5SeZF/pPbBg5+cwyEH2kqOsrYvQpVedRL2j8beV+fwPXFbW3\nHaD1CXRD/EfPyzBPyUf4DbbLMBMBHHHfymdUvoO9qwKBgDUlEBmplaAesFJYs2Z+\ntoZElcIYv9K7pK+AZz9zOofm/5jwROVZgRWSK01pqd4hxXaLivgE25ccTXXyZ+ml\nqVRRosRR3DzA2sSSVzhKh0hE92QE1qUF0AB8MBkj21JGX5r4zAzPC+qWsuPnteqw\nGc27pG0/AkndxRce8Ab4mTbi\n-----END PRIVATE KEY-----\n",
+  "client_email": "djangochatbot@reactpageagent-rehl.iam.gserviceaccount.com",
+  "client_id": "117970967444197037619",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/djangochatbot%40reactpageagent-rehl.iam.gserviceaccount.com"
+}
