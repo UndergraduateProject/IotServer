@@ -72,6 +72,11 @@ io.on("connection", (socket) => {
     socket.on("chatbot", msg =>{
         socket.broadcast.emit("chatbot",msg)
     })
+
+    //angle
+    socket.on("angle", msg =>{
+        socket.broadcast.emit("chatbot",msg)
+    })
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
