@@ -20,7 +20,7 @@ session_client = dialogflow.SessionsClient()
 session = session_client.session_path(DIALOGFLOW_PROJECT_ID, SESSION_ID)
 #text_input = dialogflow.types.TextInput(text=text_to_be_analyzed, language_code=DIALOGFLOW_LANGUAGE_CODE)
 
-def get_input(text_to_be_analyzed="ni_chatbot"):
+def get_response(text_to_be_analyzed="ni_chatbot"):
     text_input = dialogflow.types.TextInput(text=text_to_be_analyzed, language_code=DIALOGFLOW_LANGUAGE_CODE)
     query_input = dialogflow.types.QueryInput(text=text_input) # dialogflow database
 
@@ -81,9 +81,10 @@ def on_connect():
 
 @sio.on("chatbot")
 def on_message(data):
+    print("message" ,data)
     global response
-    response = get_input(data)
-    get_output(response)
+    response = get_response(data)
+    # get_output(response)
     print("keyword: ", response.query_result.intent.display_name)
     #command+shift+p -> interpreter-> copy bin/python
     keyword = response.query_result.intent.display_name
@@ -100,9 +101,10 @@ def on_message(data):
     elif keyword == "open watering":
         action_watering()
     elif keyword == "Default Fallback Intent":
+        sio.emit("chatbot", "Sorry, what was that?")
         print("Sorry, what was that?")
     else:
-        get_output(response)
+        sio.emit('chatbot', response.query_result.fulfillment_text)
 
     
 
