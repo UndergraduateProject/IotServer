@@ -1,5 +1,6 @@
 from os import environ
 from django.db import models
+from django.contrib.auth.models import User
 
 SWITCH_CHOICE = [
     ('ON', 'ON'),
@@ -99,7 +100,15 @@ class Plant(models.Model):
     description = models.CharField(max_length=300)
     environment = models.CharField(max_length=300)
     livespan = models.FloatField()
+    min_temp = models.FloatField(default=0)
+    max_temp = models.FloatField(default=0)
+    min_humidity = models.FloatField(default=0)
+    max_humidity = models.FloatField(default=0)
+    image = models.ImageField(null=True, blank=True)
 
+class UsertoPlant(models.Model):
+    user = models.ForeignKey('auth.User', related_name='User_plant', on_delete=models.PROTECT)
+    plant = models.ForeignKey(Plant, related_name='User_plant', on_delete=models.PROTECT)
 
 class Electricity(models.Model):
     quantity = models.FloatField()

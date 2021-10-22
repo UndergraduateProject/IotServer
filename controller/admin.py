@@ -1,5 +1,5 @@
 from django.contrib import admin
-from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition
+from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition, UsertoPlant
 
 # Register your models here.
 class ControllerAdmin(admin.ModelAdmin):
@@ -39,3 +39,4 @@ admin.site.register(Electricity, ElectricityAdmin)
 admin.site.register(Track)
 admin.site.register(WaterStorage, WaterStorageAdmin)
 admin.site.register(WarningCondition, WarningConditionAdmin)
+admin.site.register(UsertoPlant)
