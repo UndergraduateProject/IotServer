@@ -35,7 +35,8 @@ class PlantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Plant
-        fields = ['id', 'name', 'description', 'environment', 'livespan']
+        # fields = ['id', 'name', 'description', 'environment', 'livespan']
+        fields = '__all__'
 
 class UsertoplantSerializer(serializers.ModelSerializer):
     
