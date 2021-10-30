@@ -36,6 +36,12 @@ io.on("connection", (socket) => {
         io.sockets.emit("message", message);
     })
 
+    // message from 
+    socket.on("notification", message => {
+        console.log(message)
+        io.sockets.emit("notification", message);
+    })
+
     // webRTC message
     socket.on("rtc-message", message => {
         console.log('get messsage');
