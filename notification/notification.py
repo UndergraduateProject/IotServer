@@ -1,4 +1,4 @@
-import requests as eq
+import requests as rq
 import json
 import socketio
 
@@ -32,7 +32,7 @@ def on_message(data):
   token_data = {'username': 'admin', 'password': 'rootroot'}
   res = rq.post(token_url, token_data)
   res = json.loads(res.text)
-  headers= {'Authorization': res['token']}
+  headers= {'Authorization': 'Token '+res['token']}
   res = rq.post(warning_url, data = data, headers = headers)
   print(response.status_code)
   print(response.json())
