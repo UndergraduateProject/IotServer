@@ -90,7 +90,7 @@ class PlantImgViewSet(viewsets.ModelViewSet):
             crop_leaf_path = os.path.join(crops_path,crop_leaf_name)
             # leaf illness model 
             result = leaf_predict(crop_leaf_path) # leaf illness prediction
-            gradcam_cmd = f'python3 main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/leafillness.pt'
+            gradcam_cmd = f'python3 main.py --image-path {crop_leaf_path} --network resnet50 --weight-path ../leafmodel/model_squeezenet.pt'
             os.system(gradcam_cmd) # excute gradcam 
             cam_leaf_path = 'results/'+crop_leaf_name.split('.')[0]+'-resnet50-cam++.jpg'
             crop_img = PlantYoloCropImg.objects.create(plantimg=plantimage, image=ImageFile(open(crop_leaf_path, 'rb')), 

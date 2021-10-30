@@ -1,5 +1,8 @@
 from django.contrib import admin
-from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition
+from controller.models import (Controller, Watering, LED, Fan, 
+                                ActionCondition, Plant, Electricity,
+                                Track, WaterStorage, WarningCondition, 
+                                UsertoPlant, WarningRecord)
 
 # Register your models here.
 class ControllerAdmin(admin.ModelAdmin):
@@ -29,6 +32,9 @@ class TrackAdmin(admin.ModelAdmin):
 class WaterStorageAdmin(admin.ModelAdmin):
     readonly_fields = ('timestamp', )
 
+class WarningRecordAdmim(admin.ModelAdmin):
+    readonly_fields = ('timestamp', )
+
 admin.site.register(Controller, ControllerAdmin)
 admin.site.register(Watering, WateringAdmin)
 admin.site.register(LED, LEDAdmin)
@@ -39,3 +45,5 @@ admin.site.register(Electricity, ElectricityAdmin)
 admin.site.register(Track)
 admin.site.register(WaterStorage, WaterStorageAdmin)
 admin.site.register(WarningCondition, WarningConditionAdmin)
+admin.site.register(UsertoPlant)
+admin.site.register(WarningRecord)
