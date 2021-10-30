@@ -114,5 +114,5 @@ class WaterStorageViewSet(viewsets.ModelViewSet):
     serializer_class = WaterStorageSerializer
 
 class WarningRecordViewSet(viewsets.ModelViewSet):
-    queryset = WarningRecord.objects.all()
+    queryset = WarningRecord.objects.all().order_by('-timestamp')
     serializer_class = WarningRecordSerializer
