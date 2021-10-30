@@ -94,6 +94,13 @@ class WarningCondition(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+class WarningRecord(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.CharField(max_length=100)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.timestamp)
 
 class Plant(models.Model):
     name = models.CharField(max_length=30)

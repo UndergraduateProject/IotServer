@@ -28,6 +28,7 @@ from controller.views import (
     TrackViewSet,
     WaterStorageViewSet,
     UsertoplantViewSet,
+    WarningRecordViewSet,
     )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -57,6 +58,7 @@ router.register(r'Electricity', ElectricityViewSet)
 router.register(r'Track', TrackViewSet)
 router.register(r'WaterStorage', WaterStorageViewSet)
 router.register(r'Usertoplant', UsertoplantViewSet)
+router.register(r'WarningRecord', WarningRecordViewSet)
 
 
 schema_view = get_schema_view(

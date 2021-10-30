@@ -1,11 +1,12 @@
 from functools import partial
+from re import search
 from django.db.models.query import QuerySet
 from rest_framework import serializers, viewsets
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition, UsertoPlant
+from controller.models import Controller, Watering, LED, Fan, ActionCondition, Plant, Electricity, Track, WaterStorage, WarningCondition, UsertoPlant, WarningRecord
 from controller.serializers import (
     WateringSerializer,
     LEDSerializer,
@@ -16,7 +17,8 @@ from controller.serializers import (
     TrackSerializer,
     WaterStorageSerializer,
     WarningConditionSerializer,
-    UsertoplantSerializer
+    UsertoplantSerializer,
+    WarningRecordSerializer
 )
 
 
@@ -110,3 +112,7 @@ class TrackViewSet(viewsets.ModelViewSet):
 class WaterStorageViewSet(viewsets.ModelViewSet):
     queryset = WaterStorage.objects.all()
     serializer_class = WaterStorageSerializer
+
+class WarningRecordViewSet(viewsets.ModelViewSet):
+    queryset = WarningRecord.objects.all()
+    serializer_class = WarningRecordSerializer
