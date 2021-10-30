@@ -1,4 +1,4 @@
-import requests as eq
+import requests as rq
 import json
 import socketio
 
