@@ -16,9 +16,8 @@ sio = socketio.Client()
 def on_connect():
     print('connection established')
 
-@sio.on("message")
+@sio.on("notification")
 def on_message(data):
-  print("notification")
   body = {
             'notification': data,
             'to':
